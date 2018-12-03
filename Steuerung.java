@@ -9,7 +9,16 @@ public class Steuerung
 
 	private ArrayList<Kugel> gegner = new ArrayList<Kugel>();
 	
-	//FIXME private GameField initS = new GameField();
+	
+	public void update(ArrayList<Kugel> arrayList)
+	{
+		for(Kugel a : arrayList)
+		{
+			a.move();
+		}
+	}
+	
+	
 
 	public ArrayList<Kugel> getGegner()
 	{
@@ -19,8 +28,9 @@ public class Steuerung
 		}
 		else
 		{
-			System.out.println("adfasdasdas");
-			return null;
+//			gegner.clear();
+//			init(); // Wenn die erste Init fehlschägt wird sie erneut ausgeführt
+			return gegner;
 		}
 		
 		
@@ -32,9 +42,8 @@ public class Steuerung
 		return fps;
 	}
 
-	public void init() //FIXME added irgendwie nicht richtig gegner. Denn getGegner gibt null aus.
+	public void init()
 	{
-
 		for (int i = 0; i < STARTANZ; i++)
 		{
 			gegner.add(new Ballon());

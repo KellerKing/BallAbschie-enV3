@@ -17,14 +17,12 @@ public class Ballon extends Kugel
 	@Override
 	public int getW()
 	{
-		// TODO Auto-generated method stub
 		return W;
 	}
 
 	@Override
 	public int getH()
 	{
-		// TODO Auto-generated method stub
 		return H;
 	}
 
@@ -39,7 +37,6 @@ public class Ballon extends Kugel
 		g2d.setColor(Color.red);
 		g2d.fillOval(x, y, W, H);
 		// repaint();
-		System.out.println("assssssssd");
 
 	}
 
@@ -69,5 +66,6 @@ public class Ballon extends Kugel
 
 		x += velX;
 		y += velY;
+
 	}
 }

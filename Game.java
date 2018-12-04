@@ -9,49 +9,105 @@ public class Game
 {
 	private final static int W = 1280;
 	private final static int H = 720;
+	private final double FPS = 60.0;
+	private boolean running = false;
+
+	private Thread thread;
 
 	public static Steuerung manager = new Steuerung();
 	private static GameField gamefield;
-	
 
-	
-	public void update(Graphics2D g2d)
+	private synchronized void start()
 	{
-		
+		if (running)
+			return;
+
+		running = true;
+
 	}
 
-	public static void start()
-
+	private synchronized void stop()
 	{
-		new Thread()
+		if (!running)
+			return;
+
+		running = false;
+		try
 		{
-			public void run()
-			{
-				while(true)
-				{
-					manager.calcFps();
-					//TODO manager.logic(manager.getFPS());
-					manager.update(manager.getGegner());
-					gamefield.repaint();
-					try
-					{
-						Thread.sleep(25); //TODO FPS begrenzung
-					} catch (InterruptedException e)
-					{
-						e.printStackTrace();
-					}
-				}
-			}
-		}.start();
+			thread.join();
+		} catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+		System.exit(1);
+
 	}
-	
-	
+
+	public void run()
+	{
+		//TODO auslagern in Steuerungsklasse
+		long start = System.nanoTime();
+		double ns = 1000000000 / FPS;
+		double delta = 0;
+		int updates = 0;
+		int frames = 0;
+		long timer = System.currentTimeMillis();
+
+		while (running)
+		{
+			long last = System.nanoTime();
+			delta += (last - start) / ns;
+
+			if (delta >= 1)
+			{
+				tick();
+				updates++;
+				delta--;
+			}
+			render();
+			frames++;
+
+			if (System.currentTimeMillis() - timer > 1000)
+			{
+				timer += 1000;
+				System.out.println(updates + " Ticks, FPS " + frames);
+				updates = 0;
+				frames = 0;
+			}
+
+			// manager.calcFps();
+			// TODO manager.logic(manager.getFPS());
+			manager.update(manager.getGegner());
+			gamefield.repaint();
+			try
+			{
+				Thread.sleep(70); // TODO FPS begrenzung
+			} catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		stop();
+	}
+
+	private void tick()
+	{
+
+	}
+
+	private void render()
+	{
+
+	}
+
 	public static void main(String[] argv)
 	{
+		Game game = new Game();
+		
 		manager.init();
 		gamefield = new GameField(W, H);
-		//gamefield.repaint();
-		//start();
+		game.start();
+		game.run();
 	}
 
 }

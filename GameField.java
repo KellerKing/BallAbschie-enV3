@@ -9,7 +9,6 @@ import java.util.ArrayList;;
 
 public class GameField extends JPanel
 {
-	private boolean init = false;
 
 	//private Game game = new Game();
 	private Steuerung managerX = new Steuerung();
@@ -49,18 +48,10 @@ public class GameField extends JPanel
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		
-		if(init == false) // Das init zeichnung nicht bei repaint
-		{
-			//TODO besser zugreifen.
 			for(Kugel gegnerX : game.manager.getGegner()) //FIXME //Die Arraylist ist in dem Manager der Game Klasse. Also ist die Liste fuer ManagerX leer
 			{
 				gegnerX.drawGegner(g2d);
 			}
-		}
-		else
-		{
-			init = true;
-		}
 		
 		//game.update(g2d); //Updatet die ganzen Grafiken (Ohne Timer, yey :D )
 

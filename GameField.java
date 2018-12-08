@@ -10,9 +10,11 @@ import java.util.ArrayList;;
 public class GameField extends JPanel
 {
 
-	//private Game game = new Game();
 	private Steuerung managerX = new Steuerung();
 	private Game game = new Game();
+	
+	private static int width,height;
+	
 	
 	public GameField(int w, int h)
 	{
@@ -32,6 +34,8 @@ public class GameField extends JPanel
 		fenster.setVisible(true);
 		requestFocus();
 		
+		width = fenster.getContentPane().getWidth();
+		height = fenster.getHeight();
 	}
 	
 	public GameField()
@@ -39,6 +43,15 @@ public class GameField extends JPanel
 
 	}
 
+	
+	public int getWidth()
+	{
+		return width;
+	}
+	public int getHeight()
+	{
+		return height;
+	}
 	
 	
 	
@@ -48,7 +61,7 @@ public class GameField extends JPanel
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		
-			for(Kugel gegnerX : game.manager.getGegner()) //FIXME //Die Arraylist ist in dem Manager der Game Klasse. Also ist die Liste fuer ManagerX leer
+			for(Kugel gegnerX : game.manager.getGegner()) 
 			{
 				gegnerX.drawGegner(g2d);
 			}

@@ -1,40 +1,32 @@
 import java.util.ArrayList;
 
-public class Steuerung 
+public class Steuerung
 {
 
-	private final byte STARTANZ = 10;
+	private final int STARTANZ = 200;
 
 	private ArrayList<Kugel> gegner = new ArrayList<Kugel>();
-	
-	
-	
-	
+
 	public void update(ArrayList<Kugel> arrayList)
 	{
-		for(Kugel a : arrayList)
+		for (Kugel a : arrayList)
 		{
 			a.move();
 		}
 	}
-	
-	
 
 	public ArrayList<Kugel> getGegner()
 	{
 		if (gegner.size() != 0)
 		{
 			return gegner;
-		}
-		else
+		} else
 		{
-//			gegner.clear();
-//			init(); // Wenn die erste Init fehlschägt wird sie erneut ausgeführt
+			// gegner.clear();
+			// init(); // Wenn die erste Init fehlschägt wird sie erneut ausgeführt
 			return gegner;
 		}
-		
-		
-		
+
 	}
 
 	public void init()
@@ -44,6 +36,5 @@ public class Steuerung
 			gegner.add(new Ballon());
 		}
 	}
-
 
 }

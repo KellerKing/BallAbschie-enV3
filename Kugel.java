@@ -13,6 +13,8 @@ public abstract class Kugel extends GameField
 	protected int x;
 	protected int y;
 	
+	protected float speed;
+	
 	public abstract int getW();
 	
 	public abstract int getH();

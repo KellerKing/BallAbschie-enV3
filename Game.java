@@ -43,9 +43,9 @@ public class Game
 
 	}
 
-	public void run()
+	public void run() 
 	{
-		//TODO auslagern in Steuerungsklasse
+		// TODO auslagern in Steuerungsklasse
 		long start = System.nanoTime();
 		double ns = 1000000000 / FPS;
 		double delta = 0;
@@ -75,17 +75,19 @@ public class Game
 				frames = 0;
 			}
 
-			// manager.calcFps();
-			// TODO manager.logic(manager.getFPS());
 			manager.update(manager.getGegner());
-			gamefield.repaint();
+			
+			
 			try
 			{
-				Thread.sleep(70); // TODO FPS begrenzung
+				thread.sleep(2);
+				gamefield.repaint();
 			} catch (InterruptedException e)
 			{
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
 		}
 		stop();
 	}
@@ -103,7 +105,7 @@ public class Game
 	public static void main(String[] argv)
 	{
 		Game game = new Game();
-		
+
 		manager.init();
 		gamefield = new GameField(W, H);
 		game.start();

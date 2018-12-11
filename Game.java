@@ -16,6 +16,7 @@ public class Game
 
 	public static Steuerung manager = new Steuerung();
 	private static GameField gamefield;
+	private Cursor fk = new Cursor();
 
 	private synchronized void start()
 	{

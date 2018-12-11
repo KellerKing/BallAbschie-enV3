@@ -27,7 +27,7 @@ public class GameField extends JPanel
 		
 		this.setLayout(null);
 		this.setBounds(0,0,w,h);
-		this.setBackground(Color.CYAN);
+		this.setBackground(Color.BLACK);
 		
 		fenster.add(this);
 		

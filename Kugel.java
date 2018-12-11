@@ -37,5 +37,11 @@ public abstract class Kugel extends GameField
 	
 	public void drawGegner(Graphics2D g2d)
 	{
-	}	
+	}
+	protected abstract double getRadius();
+	
+	public abstract void ballKollision();
+
+
+	
 }

@@ -3,7 +3,8 @@ import java.util.ArrayList;
 public class Steuerung
 {
 
-	private final int STARTANZ = 200;
+	private final int STARTANZ = 3;
+	
 
 	private ArrayList<Kugel> gegner = new ArrayList<Kugel>();
 
@@ -12,21 +13,13 @@ public class Steuerung
 		for (Kugel a : arrayList)
 		{
 			a.move();
+//			a.ballKollision();
 		}
 	}
 
 	public ArrayList<Kugel> getGegner()
 	{
-		if (gegner.size() != 0)
-		{
 			return gegner;
-		} else
-		{
-			// gegner.clear();
-			// init(); // Wenn die erste Init fehlschägt wird sie erneut ausgeführt
-			return gegner;
-		}
-
 	}
 
 	public void init()

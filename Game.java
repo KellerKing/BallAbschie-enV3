@@ -1,4 +1,5 @@
 import java.awt.Graphics2D;
+import java.io.IOException;
 
 /**
  * @author Luca Luca Keller
@@ -16,7 +17,8 @@ public class Game
 
 	public static Steuerung manager = new Steuerung();
 	private static GameField gamefield;
-	private Cursor fk = new Cursor();
+	
+	
 
 	private synchronized void start()
 	{
@@ -103,7 +105,7 @@ public class Game
 
 	}
 
-	public static void main(String[] argv)
+	public static void main(String[] argv) throws IOException
 	{
 		Game game = new Game();
 

@@ -7,8 +7,7 @@ public class Steuerung
 	private final int STARTANZ = 3;
 	
 	private BufferedImage spriteSheet = null;
-	
-	Cursor fK = new Cursor();
+	private Cursor fK;
 	
 
 	private ArrayList<Kugel> gegner = new ArrayList<Kugel>();
@@ -37,8 +36,16 @@ public class Steuerung
 		ImageLoader loader = new ImageLoader();
 		spriteSheet =loader.loadImage("/Images/SpriteSheet.png");
 		
-		//SpriteSheet spritesFianly = new SpriteSheet(spriteSheet);
-		
+		fK = new Cursor(this);
 	}
-
+	
+	public BufferedImage getSpriteSheet()
+	{
+		return spriteSheet;
+	}
+	
+	public Cursor getCursor()
+	{
+		return fK;
+	}
 }

@@ -1,4 +1,6 @@
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferStrategy;
 import java.io.IOException;
 
 /**
@@ -6,6 +8,8 @@ import java.io.IOException;
  *
  */
 
+// TODO Schauen ob das auch nur mit manager geht und nicht mit
+// manager.getSteuerung().....
 public class Game
 {
 	private final static int W = 1280;
@@ -17,8 +21,6 @@ public class Game
 
 	public static Steuerung manager = new Steuerung();
 	private static GameField gamefield;
-	
-	
 
 	private synchronized void start()
 	{
@@ -46,7 +48,7 @@ public class Game
 
 	}
 
-	public void run() 
+	public void run()
 	{
 		// TODO auslagern in Steuerungsklasse
 		long start = System.nanoTime();
@@ -73,18 +75,17 @@ public class Game
 			if (System.currentTimeMillis() - timer > 1000)
 			{
 				timer += 1000;
-				System.out.println(updates + " Ticks, FPS " + frames);
+//				System.out.println(updates + " Ticks, FPS " + frames);
 				updates = 0;
 				frames = 0;
 			}
 
 			manager.update(manager.getGegner());
-			
-			
+
 			try
 			{
 				thread.sleep(2);
-				gamefield.repaint();
+
 			} catch (InterruptedException e)
 			{
 				// TODO Auto-generated catch block
@@ -97,13 +98,17 @@ public class Game
 
 	private void tick()
 	{
-
+//		manager.getCursor().updatePos();
 	}
 
 	private void render()
 	{
-
+		gamefield.repaint();
 	}
+	
+
+	
+	
 
 	public static void main(String[] argv) throws IOException
 	{

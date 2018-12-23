@@ -33,7 +33,7 @@ public class GameField extends JPanel
 		this.setBackground(Color.BLACK);
 
 		fenster.add(this);
-
+		
 		fenster.setVisible(true);
 		requestFocus();
 
@@ -42,6 +42,7 @@ public class GameField extends JPanel
 		
 		this.addMouseMotionListener(game.manager.getCursor());
 		this.addMouseListener(game.manager.getCursor());
+		
 
 	}
 

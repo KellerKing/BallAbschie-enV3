@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Ballon extends Kugel
@@ -8,6 +9,7 @@ public class Ballon extends Kugel
 	
 	private GameField zeichenboss = new GameField();
 	private Steuerung manager = new Steuerung();
+	private BufferedImage ballon;
 	
 	// Groesse
 	private final int W = 50;
@@ -27,6 +29,14 @@ public class Ballon extends Kugel
 	private int yDif;
 	private double kollision;
 	
+	public Ballon(Steuerung game)
+	{
+		this.manager = game;
+		
+		SpriteSheet spritesBallon = new SpriteSheet(manager.getSpriteSheet());
+		ballon = spritesBallon.grabImage(2, 1, 32, 32);
+	}
+
 	@Override
 	public int getW()
 	{
@@ -54,14 +64,11 @@ public class Ballon extends Kugel
 	{
 		super.drawGegner(g2d);
 
-
 		//x und y ihren wert Updaten
 		x = (int) (x + velX);
 		y = (int) (y + velY);
 		
-		g2d.setColor(Color.red);
-		g2d.fillOval(x, y, W, H);
-		// repaint();
+		g2d.drawImage(ballon, this.x, this.y, null);
 
 	}
 
@@ -110,6 +117,12 @@ public class Ballon extends Kugel
 	public double getRadius()
 	{
 		return radius;
+	}
+	
+	public Rectangle getBounds()
+	{
+		return new Rectangle(this.x, this.y, W, H);
+		
 	}
 
 }

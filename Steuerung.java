@@ -4,11 +4,10 @@ import java.util.ArrayList;
 
 public class Steuerung
 {
-	private final int STARTANZ = 3;
-	
+	private final int STARTANZ = 2;
+
 	private BufferedImage spriteSheet = null;
 	private Cursor fK;
-	
 
 	private ArrayList<Kugel> gegner = new ArrayList<Kugel>();
 
@@ -17,33 +16,34 @@ public class Steuerung
 		for (Kugel a : arrayList)
 		{
 			a.move();
-//			a.ballKollision();
+			// a.ballKollision();
 		}
 	}
 
 	public ArrayList<Kugel> getGegner()
 	{
-			return gegner;
+		return gegner;
 	}
 
 	public void init() throws IOException
 	{
+		// SpriteSheet
+		ImageLoader loader = new ImageLoader();
+		spriteSheet = loader.loadImage("/Images/SpriteSheet.png");
+
 		for (int i = 0; i < STARTANZ; i++)
 		{
-			gegner.add(new Ballon());
+			gegner.add(new Ballon(this));
 		}
-		
-		ImageLoader loader = new ImageLoader();
-		spriteSheet =loader.loadImage("/Images/SpriteSheet.png");
-		
+
 		fK = new Cursor(this);
 	}
-	
+
 	public BufferedImage getSpriteSheet()
 	{
 		return spriteSheet;
 	}
-	
+
 	public Cursor getCursor()
 	{
 		return fK;

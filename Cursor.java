@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
+import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,8 +14,11 @@ import javax.swing.JPanel;
 
 public class Cursor implements MouseMotionListener, MouseListener
 {
+	private Steuerung game;
 
 	private BufferedImage cursor;
+
+	private Rectangle hitbox;
 
 	public Cursor()
 	{
@@ -23,6 +27,8 @@ public class Cursor implements MouseMotionListener, MouseListener
 
 	public Cursor(Steuerung game)
 	{
+		this.game = game;
+
 		SpriteSheet spritesFianly = new SpriteSheet(game.getSpriteSheet());
 
 		cursor = spritesFianly.grabImage(1, 1, 32, 32);
@@ -39,20 +45,12 @@ public class Cursor implements MouseMotionListener, MouseListener
 
 		if (outOf == true)
 		{
-		}
-		else
+		} else
 		{
-			g2d.drawImage(cursor, mouseX, mouseY, null);
+			g2d.drawImage(cursor, mouseX - 16, mouseY - 16, null);
+			g2d.drawRect(mouseX, mouseY, 15, 15);
 		}
 	}
-
-	// public void updatePos() // TODO variablen
-	// {
-	// mouseX = -1280 + (int) MouseInfo.getPointerInfo().getLocation().getX();
-	// mouseY = -720 + (int) MouseInfo.getPointerInfo().getLocation().getY();
-	//
-	// System.out.printf("X: %s \n Y: %s", mouseX, mouseY);
-	// }
 
 	public Cursor getCursor()
 	{
@@ -62,7 +60,8 @@ public class Cursor implements MouseMotionListener, MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
+		updateCursorHit(e);
+		CheckHit();
 
 	}
 
@@ -82,9 +81,7 @@ public class Cursor implements MouseMotionListener, MouseListener
 	@Override
 	public void mousePressed(MouseEvent e)
 	{
-		mouseX = e.getX();
-		mouseY = e.getY();
-
+		updateCursorHit(e);
 	}
 
 	@Override
@@ -97,15 +94,36 @@ public class Cursor implements MouseMotionListener, MouseListener
 	@Override
 	public void mouseDragged(MouseEvent e)
 	{
-		// TODO Auto-generated method stub
-
+		updateCursorHit(e);
+		CheckHit();
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e)
 	{
+		updateCursorHit(e);
+	}
+
+	public void updateCursorHit(MouseEvent e)
+	{
 		mouseX = e.getX();
 		mouseY = e.getY();
+
+		hitbox = new Rectangle(mouseX, mouseY, 10, 10);
+	}
+
+	public void CheckHit()
+	{
+		for (int i = 0; i < game.getGegner().size(); i++)
+		{
+			Rectangle gegner = game.getGegner().get(i).getBounds();
+
+			if (hitbox.intersects(gegner))
+			{
+				game.getGegner().remove(i);
+				System.out.println("Treffer");
+			}
+		}
 	}
 
 }

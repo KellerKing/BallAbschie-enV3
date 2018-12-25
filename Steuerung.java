@@ -4,8 +4,13 @@ import java.util.ArrayList;
 
 public class Steuerung
 {
-	private final int STARTANZ = 2;
-
+	public Steuerung()
+	{
+		
+	}
+	
+	
+	private final int STARTANZ = 20;
 	private BufferedImage spriteSheet = null;
 	private Cursor fK;
 
@@ -27,6 +32,7 @@ public class Steuerung
 
 	public void init() throws IOException
 	{
+		
 		// SpriteSheet
 		ImageLoader loader = new ImageLoader();
 		spriteSheet = loader.loadImage("/Images/SpriteSheet.png");

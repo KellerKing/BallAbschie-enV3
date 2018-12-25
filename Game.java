@@ -21,7 +21,7 @@ public class Game
 
 	public static Steuerung manager = new Steuerung();
 	private static GameField gamefield;
-
+	
 	private synchronized void start()
 	{
 		if (running)
@@ -98,7 +98,6 @@ public class Game
 
 	private void tick()
 	{
-//		manager.getCursor().updatePos();
 	}
 
 	private void render()

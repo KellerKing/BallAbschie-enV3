@@ -12,9 +12,8 @@ public class Ballon extends Kugel
 	private BufferedImage ballon;
 	
 	// Groesse
-	private final int W = 50;
-	private final int H = 50;
-	private final int radius  = 25; //TODO in superklasse nicht mit konstanten
+	private final int W = 32;
+	private final int H = 32;
 
 	// Position Muss hier gesetzt werden und nicht in draw
 	private int x = (int) (Math.random() * (1100 + 1)) + 1;
@@ -86,43 +85,18 @@ public class Ballon extends Kugel
 		 velX = -velX;
 		 }
 		
-		 if (y <= 0 || y + H >= zeichenboss.getHeight() - H/2)
+		 if (y <= 0 || y + H >= zeichenboss.getHeight() - H)
 		 {
 		 velY = -velY;
 		 }
 		 
-		 //Kollision of 2 balls
-//		 ballKollision();
 	}
-	public void ballKollision()
-	{
-		ArrayList<Kugel> gegner =  manager.getGegner();
-		
-		for(int i = 1;  i <= gegner.size(); i++)
-		{
-			for(int j = 0; j < gegner.size(); j++)
-			{
-				xDif = gegner.get(i).getX() - gegner.get(j).getX();
-				yDif = gegner.get(i).getX() - gegner.get(j).getY();
-				kollision = Math.sqrt(xDif * xDif + yDif * yDif);
-				
-				if(kollision <= gegner.get(i).getRadius() + gegner.get(j).getRadius())
-				{
-					System.out.println("Kollision");
-				}
-			}
-		}
-	}
-	
-	public double getRadius()
-	{
-		return radius;
-	}
-	
+
 	public Rectangle getBounds()
 	{
 		return new Rectangle(this.x, this.y, W, H);
 		
 	}
+
 
 }

@@ -12,36 +12,31 @@ public abstract class Kugel extends GameField
 	protected int h;
 	protected int x;
 	protected int y;
-	
+
 	protected float speed;
-	
+
 	public abstract int getW();
-	
+
 	public abstract int getH();
-	
+
 	public abstract void setW(int pw);
-	
+
 	public abstract void setH(int ph);
-	
+
 	public abstract void move();
-	
+
 	public int getX()
 	{
 		return x;
 	}
-	
+
 	public int getY()
 	{
 		return y;
 	}
-	
+
 	public void drawGegner(Graphics2D g2d)
 	{
 	}
-	protected abstract double getRadius();
-	
-	public abstract void ballKollision();
 
-
-	
 }
